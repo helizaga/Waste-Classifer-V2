@@ -16,4 +16,4 @@ flask-cors == 3.0.10
 requests == 2.23.0
 
 # C:\Users\tomel\Downloads\Compressed\flask-pytorch-backend-master\flask-pytorch-backend-master\backend\app.py: 6
-tensorflow == 2.2.0rc2
+tensorflow-cpu == 2.4.1
