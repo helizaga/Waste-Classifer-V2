@@ -1,0 +1,6 @@
+.Python
+bin/
+include/
+lib/
+pip-selfcheck.json
+backend/tf_files/training_summaries/basic/train/events.out.tfevents.1613269626.DESKTOP-515EPNM
