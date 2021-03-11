@@ -76,4 +76,4 @@ def predict_img(img_path):
 
 
 if __name__ == "__main__":
-	app.run()
+	app.run(port=80)
