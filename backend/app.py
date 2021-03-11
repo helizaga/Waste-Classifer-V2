@@ -9,7 +9,7 @@ from flask import send_from_directory
 import requests
 
 #app = Flask(__name__)
-app = Flask(__name__, static_folder='../frontend/build')
+app = Flask(__name__, static_folder='../frontend/build', static_url_path='/')
 
 # Allow 
 CORS(app)
