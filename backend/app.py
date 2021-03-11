@@ -1,11 +1,9 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
 import os
 import json
 import tensorflow.compat.v1 as tf
-
-from PIL import Image
 
 import requests
 
@@ -24,11 +22,11 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/")
 def index():
-	return app.send_static_file('index.html')
+	return render_template('index.html')
 
 @app.errorhandler(404)
 def not_found(e):
-    return app.send_static_file('index.html')
+    return render_template('index.html')
 
 def allowed_file(filename):
     return '.' in filename and \
