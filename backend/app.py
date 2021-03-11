@@ -56,6 +56,7 @@ def upload():
 		return json.dumps(predicted_image_class)
 
 def predict_img(img_path):
+	print(os.path.dirname(os.path.abspath(__file__)))
 	image_data = tf.gfile.GFile(img_path, 'rb').read()
 	label_lines = [line.rstrip() for line in tf.gfile.GFile("tf_files/retrained_labels.txt")]
 	with tf.gfile.GFile("tf_files/retrained_graph.pb", 'rb') as f:
