@@ -10,7 +10,7 @@ from PIL import Image
 import requests
 
 #app = Flask(__name__)
-app = Flask(__name__, static_folder='../frontend/public', static_url_path='/')
+app = Flask(__name__, static_folder='./frontend/public', static_url_path='/')
 
 # Allow 
 CORS(app)
