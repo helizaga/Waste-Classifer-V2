@@ -8,7 +8,7 @@ import tensorflow.compat.v1 as tf
 import requests
 
 #app = Flask(__name__)
-app = Flask(__name__, static_folder='../frontend/build/static', template_folder="../frontend/build/")
+app = Flask(__name__, static_folder='../frontend/build')
 
 # Allow 
 CORS(app)
@@ -22,11 +22,11 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/")
 def index():
-	return render_template('index.html')
+	return app.send_static_file('index.html')
 
 @app.errorhandler(404)
 def not_found(e):
-    return render_template('index.html')
+    return app.send_static_file('index.html')
 
 def allowed_file(filename):
     return '.' in filename and \
