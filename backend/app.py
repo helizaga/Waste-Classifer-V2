@@ -12,7 +12,7 @@ import requests
 app = Flask(__name__, static_folder='../frontend/build', static_url_path='/')
 
 # Allow 
-CORS(app)
+cors = CORS(app)
 
 # Path for uploaded images
 UPLOAD_FOLDER = ''
