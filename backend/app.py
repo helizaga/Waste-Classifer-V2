@@ -8,7 +8,7 @@ import tensorflow.compat.v1 as tf
 import requests
 
 #app = Flask(__name__)
-app = Flask(__name__, static_folder='../frontend/build', static_url_path='')
+app = Flask(__name__, static_folder='../frontend/build/static', template_folder="../frontend/build/")
 
 # Allow 
 CORS(app)
