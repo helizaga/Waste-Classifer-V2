@@ -4,11 +4,12 @@ from werkzeug.utils import secure_filename
 import os
 import json
 import tensorflow.compat.v1 as tf
+from flask import send_from_directory
 
 import requests
 
 #app = Flask(__name__)
-app = Flask(__name__, static_folder='../frontend/build', static_url_path = '')
+app = Flask(__name__, static_folder='../frontend/build')
 
 # Allow 
 CORS(app)
@@ -22,11 +23,12 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/")
 def index():
-	return app.send_static_file('index.html')
+	return send_from_directory(app.static_folder, "index.html")
 
 @app.errorhandler(404)
 def not_found(e):
-    return app.send_static_file('index.html')
+    return send_from_directory(app.static_folder, "index.html")
+
 
 def allowed_file(filename):
     return '.' in filename and \
