@@ -1,6 +1,5 @@
 {
   "name": "frontend",
-  "homepage": "https://react-flask-waste-classifier.herokuapp.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
