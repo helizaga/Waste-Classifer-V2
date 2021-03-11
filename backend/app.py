@@ -9,7 +9,8 @@ from PIL import Image
 
 import requests
 
-app = Flask(__name__)
+#app = Flask(__name__)
+app = Flask(__name__, static_folder='../frontend/public', static_url_path='/')
 
 # Allow 
 CORS(app)
@@ -22,8 +23,8 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/")
-def hello():
-	return "Hello World!"
+def index():
+	 return app.send_static_file('index.html')
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -48,7 +49,7 @@ def upload_file():
 			predicted_image_class = predict_img(UPLOAD_FOLDER+filename)
 			print("predicted_image_class", predicted_image_class)
 
-	return json.dumps(predicted_image_class)
+		return json.dumps(predicted_image_class)
 
 def predict_img(img_path):
 	image_data = tf.gfile.GFile(img_path, 'rb').read()
