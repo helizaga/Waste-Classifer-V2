@@ -10,6 +10,7 @@ import requests
 
 #app = Flask(__name__)
 app = Flask(__name__, static_folder='../frontend/build', static_url_path='/')
+app.secret_key = "secret key"
 
 # Allow 
 cors = CORS(app)
@@ -50,13 +51,12 @@ def upload():
 			file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 			
 			# Send uploaded image for prediction
-			predicted_image_class = predict_img(UPLOAD_FOLDER+filename)
+			predicted_image_class = predict_img(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 			print("predicted_image_class", predicted_image_class)
 
 		return json.dumps(predicted_image_class)
 
 def predict_img(img_path):
-	print(os.path.dirname(os.path.abspath(__file__)))
 	image_data = tf.gfile.GFile(img_path, 'rb').read()
 	label_lines = [line.rstrip() for line in tf.gfile.GFile("tf_files/retrained_labels.txt")]
 	with tf.gfile.GFile("tf_files/retrained_graph.pb", 'rb') as f:
