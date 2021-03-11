@@ -58,7 +58,6 @@ def upload():
 def predict_img(img_path):
 	image_data = tf.gfile.GFile(img_path, 'rb').read()
 	label_lines = [line.rstrip() for line in tf.gfile.GFile("tf_files/retrained_labels.txt")]
-	os.path.dirname(r'C:\Program Files')
 	with tf.gfile.GFile("tf_files/retrained_graph.pb", 'rb') as f:
 		graph_def = tf.GraphDef()
 		graph_def.ParseFromString(f.read())
