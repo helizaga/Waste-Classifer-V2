@@ -5,8 +5,8 @@ import os
 import json
 import tensorflow.compat.v1 as tf
 from flask import send_from_directory
-
 import requests
+
 
 #app = Flask(__name__)
 app = Flask(__name__, static_folder='../frontend/build', static_url_path='/')
@@ -49,7 +49,7 @@ def upload():
 		if file and allowed_file(file.filename):
 			filename = secure_filename(file.filename)
 			img_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-			print(os.getcwd())
+			print(os.getcwd(), flush = True)
 			file.save(img_path)
 			# Send uploaded image for prediction
 			predicted_image_class = predict_img(img_path)
