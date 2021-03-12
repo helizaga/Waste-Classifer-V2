@@ -52,7 +52,7 @@ def upload():
 			print("This is the working directory", os.getcwd(), flush = True)
 			print("This is list of files", os.listdir(), flush = True)
 			file.save(img_path)
-			
+
 			#os.chdir('../')
 			#print("This is the working directory", os.getcwd(), flush = True)
 			#print("This is list of files", os.listdir(), flush = True)
@@ -65,8 +65,8 @@ def upload():
 
 def predict_img(img_path):
 	image_data = tf.gfile.GFile(img_path, 'rb').read()
-	label_lines = [line.rstrip() for line in tf.gfile.GFile("tf_files/retrained_labels.txt")]
-	with tf.gfile.GFile("tf_files/retrained_graph.pb", 'rb') as f:
+	label_lines = [line.rstrip() for line in tf.gfile.GFile("frontend/tf_files/retrained_labels.txt")]
+	with tf.gfile.GFile("frontend/tf_files/retrained_graph.pb", 'rb') as f:
 		graph_def = tf.GraphDef()
 		graph_def.ParseFromString(f.read())
 		_ = tf.import_graph_def(graph_def, name='')
