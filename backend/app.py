@@ -48,10 +48,11 @@ def upload():
 
 		if file and allowed_file(file.filename):
 			filename = secure_filename(file.filename)
-			file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-			
+			img_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+			print(os.getcwd())
+			file.save(img_path)
 			# Send uploaded image for prediction
-			predicted_image_class = predict_img(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+			predicted_image_class = predict_img(img_path)
 			print("predicted_image_class", predicted_image_class)
 
 		return json.dumps(predicted_image_class)
