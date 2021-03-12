@@ -49,7 +49,7 @@ def upload():
 		if file and allowed_file(file.filename):
 			filename = secure_filename(file.filename)
 			img_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-			print(os.getcwd(), flush = True)
+			print("This is the working directory ", os.getcwd(), flush = True)
 			file.save(img_path)
 			# Send uploaded image for prediction
 			predicted_image_class = predict_img(img_path)
