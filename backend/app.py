@@ -52,9 +52,11 @@ def upload():
 			print("This is the working directory", os.getcwd(), flush = True)
 			print("This is list of files", os.listdir(), flush = True)
 			file.save(img_path)
-			os.chdir('../')
-			print("This is the working directory", os.getcwd(), flush = True)
-			print("This is list of files", os.listdir(), flush = True)
+			
+			#os.chdir('../')
+			#print("This is the working directory", os.getcwd(), flush = True)
+			#print("This is list of files", os.listdir(), flush = True)
+
 			# Send uploaded image for prediction
 			predicted_image_class = predict_img(img_path)
 			print("predicted_image_class", predicted_image_class)
