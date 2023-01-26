@@ -1,103 +1,95 @@
-import React, { Component } from 'react';
+import React, { useState } from "react";
 // import logo from './logo.svg';
-import './App.css';
-import axios from 'axios';
+import "./App.css";
+import axios from "axios";
 
-class App extends Component {
+const App = () => {
+  const [previewImageUrl, setPreviewImageUrl] = useState(false);
+  const [imagePrediction, setImagePrediction] = useState("");
+  const [imageFile, setImageFile] = useState();
+  // Function for previewing the chosen image
 
-  // Constructor
-  constructor() {
-    super()
-    this.state = {
-      previewImageUrl: false,
-      imageHeight: 200,
-      imagePrediction: "",
-    }
-    this.generatePreviewImageUrl = this.generatePreviewImageUrl.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.uploadHandler = this.uploadHandler.bind(this)
-  }
+  const generatePreviewImageUrl = (file, callback) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = (e) => callback(reader.result);
+  };
 
-    // Function for previewing the chosen image
-    generatePreviewImageUrl(file, callback) {
-      const reader = new FileReader()
-      const url = reader.readAsDataURL(file)
-      reader.onloadend = e => callback(reader.result)
-    }
+  // Event handler when image is chosen
+  const handleChange = (event) => {
+    const file = event.target.files[0];
 
-    // Event handler when image is chosen
-    handleChange(event) {
-      const file = event.target.files[0]
-      
-      // If the image upload is cancelled
-      if (!file) {
-        return
-      }
-
-      this.setState({imageFile: file})
-      this.generatePreviewImageUrl(file, previewImageUrl => {
-            this.setState({
-              previewImageUrl,
-              imagePrediction:""
-            })
-          })
+    // If the image upload is cancelled
+    if (!file) {
+      return;
     }
 
-    // Function for sending image to the backend
-    uploadHandler(e) {
-    var self = this;
-    const formData = new FormData()
-    formData.append('file', this.state.imageFile, 'img.png')
-    
+    setImageFile(file);
+    generatePreviewImageUrl(file, (previewImageUrl) => {
+      setPreviewImageUrl(previewImageUrl);
+      setImagePrediction("");
+    });
+  };
+
+  // Function for sending image to the backend
+  const uploadHandler = (e) => {
+    const formData = new FormData();
+    formData.append("file", imageFile, "img.png");
+    console.log("This is the working directory", process.cwd());
+
     var t0 = performance.now();
-    axios.post('https://react-flask-waste-classifier.herokuapp.com/upload', formData)
-    .then(function(response, data) {
-            data = response.data;
-            self.setState({imagePrediction:data})
-            var t1 = performance.now();
-            console.log("The time it took to predict the image " + (t1 - t0) + " milliseconds.")
-        })
-    }
+    axios
+      .post(`/upload`, formData)
+      .then((response) => {
+        const data = response.data;
+        setImagePrediction(data);
+        var t1 = performance.now();
+        console.log(
+          "The time it took to predict the image " +
+            (t1 - t0) +
+            " milliseconds."
+        );
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-        <div className="App-upload">
-          <p>
-            Upload an image for classification
-          </p>
+  return (
+    <div className="App">
+      <h1 className="App-title">Waste Image Classification App</h1>
 
-          {/* Button for choosing an image */}
-          <div>
-          <input type="file" name="file" onChange={this.handleChange} />
-          </div>
+      <div className="App-upload">
+        <p>Upload an image for classification</p>
 
-          {/* Button for sending image to backend */}
-          <div>
-          <input type="submit" onClick={this.uploadHandler} />
-          </div>
+        {/* Field for previewing the chosen image */}
+        <div className="image">
+          {previewImageUrl && <img height={400} alt="" src={previewImageUrl} />}
+        </div>
 
-          {/* Field for previewing the chosen image */}
-          <div>
-          { this.state.previewImageUrl &&
-          <img height={this.state.imageHeight} alt="" src={this.state.previewImageUrl} />
-          }
-          </div>
+        {/* Button for choosing an image */}
+        <div>
+          <input type="file" name="file" onChange={handleChange} />
+        </div>
 
-          {/* Text for model prediction */}
-          <div>
-          { this.state.imagePrediction &&
-            <p>The model predicted: {this.state.imagePrediction}
+        {/* Button for sending image to backend */}
+        <div>
+          <input type="submit" onClick={uploadHandler} />
+        </div>
+
+        {/* Text for model prediction */}
+
+        {imagePrediction && (
+          <div className="Prediction-area">
+            <p>
+              The model predicted that this image is of the waste image
+              category: {imagePrediction}
             </p>
-
-          }
           </div>
-          </div>
-        </header>
+        )}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default App;
