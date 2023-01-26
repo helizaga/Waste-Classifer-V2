@@ -49,6 +49,9 @@ def upload():
 
 
 def predict_img(image_data):
+
+    print("These are the folders and files in the current directory:", os.listdir())
+
     label_lines = [line.rstrip() for line in tf.io.gfile.GFile(
         "tf_files/retrained_labels.txt")]
     with tf.io.gfile.GFile("tf_files/retrained_graph.pb", 'rb') as f:
