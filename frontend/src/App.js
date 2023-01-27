@@ -34,9 +34,7 @@ const App = () => {
   // Function for sending image to the backend
   const uploadHandler = (e) => {
     const formData = new FormData();
-    console.log("imageFile:", imageFile);
-    formData.append("file", imageFile, "img.png");
-    console.log("formData:", formData);
+    formData.append("file", imageFile);
     var t0 = performance.now();
     axios
       .post("/upload", formData)
