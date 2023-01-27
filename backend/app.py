@@ -19,7 +19,6 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
 @app.route("/")
 def index():
-    print('hit index route')
     return send_from_directory(app.static_folder, "index.html")
 
 
@@ -36,6 +35,7 @@ def allowed_file(filename):
 @app.route('/upload', methods=['POST'])
 def upload():
     print('hit upload route')
+    print('request: ', request)
     if 'file' not in request.files:
         return "No file part"
     file = request.files['file']

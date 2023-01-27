@@ -36,6 +36,7 @@ const App = () => {
     const formData = new FormData();
     console.log("imageFile:", imageFile);
     formData.append("file", imageFile, "img.png");
+    console.log("formData:", formData);
     var t0 = performance.now();
     axios
       .post("/upload", formData)
