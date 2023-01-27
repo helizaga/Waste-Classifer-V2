@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "homepage": "https://waste-classifier-4wh5.onrender.com",
+  "homepage": "https://waste-classifer-v2-production.up.railway.app/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

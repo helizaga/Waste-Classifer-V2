@@ -7,6 +7,8 @@ const App = () => {
   const [previewImageUrl, setPreviewImageUrl] = useState(false);
   const [imagePrediction, setImagePrediction] = useState("");
   const [imageFile, setImageFile] = useState();
+  const [uploaded, setUploaded] = useState(false);
+
   // Function for previewing the chosen image
 
   const generatePreviewImageUrl = (file, callback) => {
@@ -28,6 +30,7 @@ const App = () => {
     generatePreviewImageUrl(file, (previewImageUrl) => {
       setPreviewImageUrl(previewImageUrl);
       setImagePrediction("");
+      setUploaded(true);
     });
   };
 
@@ -37,7 +40,10 @@ const App = () => {
     formData.append("file", imageFile);
     var t0 = performance.now();
     axios
-      .post("/upload", formData)
+      .post(
+        "https://waste-classifer-v2-production.up.railway.app/upload",
+        formData
+      )
       .then((response) => {
         const data = response.data;
         setImagePrediction(data);
@@ -72,7 +78,7 @@ const App = () => {
 
         {/* Button for sending image to backend */}
         <div>
-          <input type="submit" onClick={uploadHandler} />
+          <input type="submit" disabled={!uploaded} onClick={uploadHandler} />
         </div>
 
         {/* Text for model prediction */}

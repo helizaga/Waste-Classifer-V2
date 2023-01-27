@@ -29,6 +29,11 @@ input[type="submit"] {
   margin-left: 20px;
 }
 
+input[type="submit"]:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
 .App-title {
   color: black;
   margin-top: 20px;

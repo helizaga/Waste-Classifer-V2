@@ -11,7 +11,7 @@ from flask import send_from_directory
 app = Flask(__name__, static_folder='../frontend/build', static_url_path='/')
 
 # Allow
-cors = CORS(app, resources={r"/*": {"origins": "*"}})
+cors = CORS(app)
 
 
 # Allowed file extransions
@@ -41,8 +41,7 @@ def upload():
     if file and allowed_file(file.filename):
         image_data = file.read()
         predicted_image_class = predict_img(image_data)
-        print("predicted_image_class: ", predicted_image_class)
-        return json.dumps(predicted_image_class)
+        return predicted_image_class
 
 
 def predict_img(image_data):
