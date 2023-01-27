@@ -9,7 +9,6 @@ from flask import send_from_directory
 
 # app = Flask(__name__)
 app = Flask(__name__, static_folder='../frontend/build', static_url_path='/')
-app.secret_key = "secret key"
 
 # Allow
 cors = CORS(app)
@@ -33,27 +32,25 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-@app.route('/upload', methods=['GET', 'POST'])
+@app.route('/upload', methods=['POST'])
 def upload():
     print('hit upload route')
-    if request.method == 'POST':
-        if 'file' not in request.files:
-            return "No file part"
-        file = request.files['file']
+    if 'file' not in request.files:
+        return "No file part"
+    file = request.files['file']
 
-        if file and allowed_file(file.filename):
-            image_data = file.read()
-            predicted_image_class = predict_img(image_data)
-            print("predicted_image_class: ", predicted_image_class)
-        print('returning predicted_image_class')
+    if file and allowed_file(file.filename):
+        image_data = file.read()
+        predicted_image_class = predict_img(image_data)
+        print("predicted_image_class: ", predicted_image_class)
         return json.dumps(predicted_image_class)
 
 
 def predict_img(image_data):
     print('hit predict_img function')
     label_lines = [line.rstrip() for line in tf.io.gfile.GFile(
-        "backend/tf_files/retrained_labels.txt")]
-    with tf.io.gfile.GFile("backend/tf_files/retrained_graph.pb", 'rb') as f:
+        "tf_files/retrained_labels.txt")]
+    with tf.io.gfile.GFile("tf_files/retrained_graph.pb", 'rb') as f:
         graph_def = tf.compat.v1.GraphDef()
         graph_def.ParseFromString(f.read())
         _ = tf.import_graph_def(graph_def, name='')
