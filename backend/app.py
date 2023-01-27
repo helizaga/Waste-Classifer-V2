@@ -43,15 +43,12 @@ def upload():
         if file and allowed_file(file.filename):
             image_data = file.read()
             predicted_image_class = predict_img(image_data)
-            print("predicted_image_class", predicted_image_class)
+            print("predicted_image_class: ", predicted_image_class)
 
         return json.dumps(predicted_image_class)
 
 
 def predict_img(image_data):
-
-    print("These are the folders and files in the current directory:", os.listdir())
-
     label_lines = [line.rstrip() for line in tf.io.gfile.GFile(
         "backend/tf_files/retrained_labels.txt")]
     with tf.io.gfile.GFile("backend/tf_files/retrained_graph.pb", 'rb') as f:

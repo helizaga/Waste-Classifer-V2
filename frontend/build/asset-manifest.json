@@ -1,21 +1,21 @@
 {
   "files": {
     "main.css": "/static/css/main.2c80b2e2.chunk.css",
-    "main.js": "/static/js/main.bc081071.chunk.js",
-    "main.js.map": "/static/js/main.bc081071.chunk.js.map",
+    "main.js": "/static/js/main.fbba7b71.chunk.js",
+    "main.js.map": "/static/js/main.fbba7b71.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.cc85cbe0.js",
     "runtime-main.js.map": "/static/js/runtime-main.cc85cbe0.js.map",
-    "static/js/2.85acd400.chunk.js": "/static/js/2.85acd400.chunk.js",
-    "static/js/2.85acd400.chunk.js.map": "/static/js/2.85acd400.chunk.js.map",
+    "static/js/2.5c67e704.chunk.js": "/static/js/2.5c67e704.chunk.js",
+    "static/js/2.5c67e704.chunk.js.map": "/static/js/2.5c67e704.chunk.js.map",
     "index.html": "/index.html",
     "static/css/main.2c80b2e2.chunk.css.map": "/static/css/main.2c80b2e2.chunk.css.map",
-    "static/js/2.85acd400.chunk.js.LICENSE.txt": "/static/js/2.85acd400.chunk.js.LICENSE.txt",
+    "static/js/2.5c67e704.chunk.js.LICENSE.txt": "/static/js/2.5c67e704.chunk.js.LICENSE.txt",
     "static/media/App.css": "/static/media/landfill.13d3679f.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.cc85cbe0.js",
-    "static/js/2.85acd400.chunk.js",
+    "static/js/2.5c67e704.chunk.js",
     "static/css/main.2c80b2e2.chunk.css",
-    "static/js/main.bc081071.chunk.js"
+    "static/js/main.fbba7b71.chunk.js"
   ]
 }
