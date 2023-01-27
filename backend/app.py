@@ -11,7 +11,8 @@ from flask import send_from_directory
 app = Flask(__name__, static_folder='../frontend/build', static_url_path='/')
 
 # Allow
-cors = CORS(app)
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
+
 
 # Allowed file extransions
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
