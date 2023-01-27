@@ -18,4 +18,4 @@ requests == 2.23.0
 # C:\Users\tomel\Downloads\Compressed\flask-pytorch-backend-master\flask-pytorch-backend-master\backend\app.py: 6
 tensorflow >= 2.11.0
 
-gunicorn == 20.0.4
+gunicorn >= 20.1.0

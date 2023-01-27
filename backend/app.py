@@ -19,6 +19,7 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
 @app.route("/")
 def index():
+    print('hit index route')
     return send_from_directory(app.static_folder, "index.html")
 
 
