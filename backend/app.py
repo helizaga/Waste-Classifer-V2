@@ -35,6 +35,7 @@ def allowed_file(filename):
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
+    print('hit upload route')
     if request.method == 'POST':
         if 'file' not in request.files:
             return "No file part"
@@ -44,11 +45,12 @@ def upload():
             image_data = file.read()
             predicted_image_class = predict_img(image_data)
             print("predicted_image_class: ", predicted_image_class)
-
+        print('returning predicted_image_class')
         return json.dumps(predicted_image_class)
 
 
 def predict_img(image_data):
+    print('hit predict_img function')
     label_lines = [line.rstrip() for line in tf.io.gfile.GFile(
         "backend/tf_files/retrained_labels.txt")]
     with tf.io.gfile.GFile("backend/tf_files/retrained_graph.pb", 'rb') as f:
