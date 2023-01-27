@@ -37,14 +37,8 @@ const App = () => {
     console.log("imageFile:", imageFile);
     formData.append("file", imageFile, "img.png");
     var t0 = performance.now();
-    // get current url and append /upload
-    const currentUrl = window.location.origin;
-    const endpoint = `${currentUrl}/upload`;
-    console.log("endpoint:", endpoint);
-
-    console.log("formData:", formData);
     axios
-      .post(endpoint, formData)
+      .post("/upload", formData)
       .then((response) => {
         const data = response.data;
         setImagePrediction(data);
