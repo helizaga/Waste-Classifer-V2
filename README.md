@@ -23,7 +23,7 @@ This is a simple web application that allows users to upload an image and receiv
 ## Installation
 1. Clone the repository:
 ```
-git clone https://github.com/yourusername/image-prediction-web-app.git
+git clone https://github.com/helizaga/Waste-Classifer-V2.git
 ```
 2. Install the required packages:
 ```
